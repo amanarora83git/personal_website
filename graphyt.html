@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="Sam Raymond - Personal Website" content="">
+    <meta name="Sam Raymond" content="">
+
+    <title>Sam Raymond - Personal Website</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/heroic-features.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+  </head>
+
+  <body>
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="index.html" style="color:darkolivegreen"> <img style="height:1.25em" src="./media/worldwide.svg"/> </a> 
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              
+            <span class="navbar-toggler-icon"></span>
+            
+
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item ">
+                <a class="nav-link" href="index.html">home
+                </a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="about.html">about me</a>
+              </li> -->
+              <li class="nav-item active">
+                <a class="nav-link" href="research.html">research</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="publications.html">publications</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="projects.html">projects</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="teaching.html">teaching</a>
+              </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="contact.html">contact</a>
+                </li> -->
+            </ul>
+          </div>
+          <span class="navbar-text">
+            <div>|
+              <a href="https://scholar.google.com.au/citations?user=9F5p1yQAAAAJ&hl=en"target="_blank"><img height="25px" style="border-radius:25px;" src="media/googleScholar.png"></a> </a>
+              <a href="https://www.linkedin.com/in/sjraymond/"target="_blank"><img height="25px" src="media/linkedinLogo.png"></a></a>
+              <a href="mailto:sjr@mit.edu"><img height="20px" src="media/mail.png "></a>
+            </div>         
+           </span>
+        </div>
+
+      </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+              <!-- Page Features -->
+
+
+
+      <h1 id="graphyt-a-3d-mpm-code-for-continuum-simulations">Graphyt: A 3D MPM code for continuum simulations</h1>
+
+      <h2 id="highlights">Highlights</h2>
+<ul>
+  <li><strong>Python</strong> Interface for flexible and fast input scripting</li>
+  <li><strong>Pyck</strong> Support for pre-preocessing</li>
+  <li><strong>3D</strong> Material Point Method (<strong>MPM</strong>) Simulation</li>
+  <li><strong>Explicit/Leap Frog</strong> time integration</li>
+  <li><strong>OpenMP</strong> Parallel Processing</li>
+  <li><strong>VTP/VTI/CSV</strong> output formats (some require additional libraries - see below), can be viewed in ParaView</li>
+</ul>
+<!-- <p><a href="https://www.youtube.com/watch?v=uz7WGGQnOZo"><img src="https://img.youtube.com/vi/uz7WGGQnOZo/0.jpg" alt="IMAGE ALT TEXT"></a></p> -->
+<iframe width="560" height="420" src="http://www.youtube.com/embed/uz7WGGQnOZo?color=white&amp;theme=light"></iframe>
+
+
+
+<h1 id="table-of-contents">Table of Contents</h1>
+
+<ul>
+  <li><a href="#current-physics-supported">Current Physics Supported</a></li>
+  <li><a href="#getting-the-code">Getting the Code</a>
+    <ul>
+      <li><a href="#download">Download</a></li>
+      <li><a href="#development">Development</a></li>
+    </ul>
+  </li>
+  <li><a href="#running-a-simulation">Running a Simulation</a></li>
+  <li><a href="#code-features">Code Features</a></li>
+  <li><a href="#creating-visualisations-in-houdini">Creating Visualisations in Houdini</a></li>
+  <li><a href="#graphyt-api-documentation">Graphyt API Documentation</a>
+    <ul>
+      <li><a href="#python-modules">Python Modules</a></li>
+      <li><a href="#domain-and-resolution">Domain and Resolution</a></li>
+      <li><a href="#material-points-and-nodes">Material Points and Nodes</a></li>
+      <li><a href="#defining-materials">Defining Materials</a></li>
+      <li><a href="#material-models">Material Models </a></li>
+      <li><a href="#damage-models">Damage Models</a></li>
+      <li><a href="#geometry">Geometry</a></li>
+      <li><a href="#pyck">PYCK</a></li>
+      <li><a href="#non-pyck">non-PYCK</a></li>
+      <li><a href="#boundaryinitial-conditions">Boundary/Initial Conditions</a></li>
+      <li><a href="#nodes">Nodes</a></li>
+      <li><a href="#material-points">Material Points</a></li>
+      <li><a href="#simulation-parameters">Simulation Parameters</a></li>
+      <li><a href="#set-up-i/o">Set Up I/O</a></li>
+      <li><a href="#solver">Solver </a></li>
+      <li><a href="#example-2d-dam-break">Example: 2D Dam Break</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="current-physics-supported">Current Physics Supported:</h1>
+<ul>
+  <li>Solid Mechanics: small strain theory
+    <ul>
+      <li>Plasticity: Drucker-Prager, Perfect</li>
+      <li>Damage: Grady-Kipp</li>
+    </ul>
+  </li>
+  <li>Fluid Mechanics: Newtonian fluids</li>
+  <li>Fluid-Solid Interaction</li>
+  <li>Multi-body Contact</li>
+  <li>Rigid Bodies (moving &amp; fixed)</li>
+  <li>Thermal conductivity</li>
+</ul>
+
+<h1 id="getting-the-code">Getting the Code</h1>
+
+<h2 id="download">Download</h2>
+<p>Binaries can be downloaded <a href="https://github.com/MITGeonumerics/GraphytPub/releases">here</a>:</p>
+
+<h2 id="development">Development</h2>
+<p>If you are interested in developing the code, please contact us.</p>
+
+<h1 id="running-a-simulation">Running a Simulation</h1>
+<ul>
+  <li>Make an output directory “output” in the same folder as the python scripts to run</li>
+  <li>Create a python script of the model</li>
+  <li>Type “python nameOfScript.py” in the terminal</li>
+</ul>
+
+<h1 id="code-features">Code Features</h1>
+<ul>
+  <li><strong>Interpolation</strong> is based on simple GIMP implementation</li>
+  <li><strong>Boundary Conditions</strong> can be applied to particles (vel, stress, force(accel)) and nodes (vel, force). Currently only one BC type per particle/node</li>
+  <li><strong>Domain</strong> is periodic by default, for finite simulations, nodal BCs can be applied within 2 cells of the domain extent defined in the scripts</li>
+</ul>
+
+<p># Creating Visualisations in Houdini</p>
+<ul>
+  <li>Output data using VTI file format</li>
+  <li>Open files in Paraview:
+                     - Create a ‘threshold’
+                     - Select filter: ‘Cell to Point Data’
+                     - Create a contour
+                     - Sava Data as “.stl”
+                     - Import stl’s into Houdini</li>
+</ul>
+
+<h1 id="graphyt-api-documentation">Graphyt API Documentation</h1>
+<h2 id="python-modules">Python Modules</h2>
+<p>Python modules are required for a graphyt script. Aside from the graphyt module, for more complex geometries, pyck (detailed below) may be used, for visualization, the VTKWriter module (also detailed below) should be included.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">graphyt</span>
+<span class="kn">import</span> <span class="nn">pyck</span>  <span class="c"># if using pyck for geometry</span>
+<span class="kn">import</span> <span class="nn">VTKWriter</span> <span class="c"># for writing output files</span>
+</code></pre></div></div>
+
+<h2 id="domain-and-resolution">Domain and Resolution</h2>
+<p>To initialize the background grid within which MPM simulations occur, the domain and resolution need to be defined:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>L        = [Lx,Ly,Lz] # Lx,y,z are the lengths of the grid
+                 in each dimension in meters
+cellsize = dx # This is the distance between the nodes
+                (only uniform resolution supported)
+psep     = dx / 2 # This is the distance between particles
+                    (optimal value is dx/2)
+</code></pre></div></div>
+<h2 id="material-points-and-nodes">Material Points and Nodes</h2>
+<p>The nodes and material points’ properties are controlled and contained in the graphyt.Nodes and graphyt.MaterialPoints python object. They require some input values during creation as shown below.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nodes</span>     <span class="o">=</span> <span class="n">graphyt</span><span class="o">.</span><span class="n">Nodes</span><span class="p">([</span><span class="n">Lx</span><span class="p">,</span><span class="n">Ly</span><span class="p">,</span><span class="n">Lz</span><span class="p">],</span> <span class="n">cellsize</span><span class="p">)</span>
+<span class="n">matpoints</span> <span class="o">=</span> <span class="n">graphyt</span><span class="o">.</span><span class="n">MaterialPoints</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+</code></pre></div></div>
+<p>These objects are used for the majority of the rest of the simulation process.</p>
+<h2 id="defining-materials">Defining Materials</h2>
+
+<p>A number of material models are available in graphyt. To define a material, the format follows the same pattern:<br></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create the material object and set the material-type</span>
+    <span class="n">material_1</span> <span class="o">=</span> <span class="n">graphyt</span><span class="o">.</span><span class="n">MaterialModels</span><span class="p">()</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
+<span class="c"># 1 - Elastic</span>
+<span class="c"># 2 - Newtonian Fluid</span>
+<span class="c"># 3 - Elastic + Perfect Plastic</span>
+<span class="c"># 4 - Elastic + Drucker Prager Plasticity</span>
+</code></pre></div></div>
+<h2 id="material-models">Material Models</h2>
+<hr>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Elastic</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setBulkMod</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setShearMod</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Newtonian Fluid</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setBulkMod</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setViscosity</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Elastic + Perfect Plastic</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setBulkMod</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setShearMod</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setYieldStress</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Elastic + Drucker Prager</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setBulkMod</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setShearMod</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setCohesion</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setCriticalStrain</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setFrictionAngle</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setDilatancyAngle</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="damage-models">Damage Models</h2>
+<p>Damage models can be added to both elastic and elastic-plastic solids.
+___</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Grady-Kipp</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setIsDamage</span><span class="p">(</span><span class="n">boolean</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setDamageModel</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setCrackSpeed</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setDamageM</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setDamageK</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</code></pre></div></div>
+<hr>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set Material Density</span>
+    <span class="n">material_1</span><span class="o">.</span><span class="n">setDensity</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<span class="c"># Add the material to a materials array, more than one material can be defined</span>
+    <span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="n">material_1</span><span class="p">]</span>
+</code></pre></div></div>
+<h2 id="geometry">Geometry</h2>
+<p>##PYCK
+*required
+    objectID, materialID</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+<h2 id="non-pyck-matpointsadd">non-PYCK (matpoints.add())</h2>
+<p>*required
+    objectID, materialID</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<h2 id="boundaryinitial-conditions">Boundary/Initial Conditions</h2>
+<h3 id="material-points">Material Points</h3>
+<h4 id="setting-particle-values">Setting Particle Values</h4>
+<p>Initializing particle properties. These commands will set particle properties for the time step they are applied. For example, if set at the beginning of the simulation they are initial conditions. Once set these values are free to change with the dynamics of the system. For persistent values the user can either set these values for each timestep or it may be more appropriate to use the Boundary Conditions (see the Particle Boundary Conditions section).</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">​</span><span class="n">setVel</span><span class="err">​</span><span class="p">(</span><span class="err">​</span><span class="n">particle_index</span><span class="p">,</span> <span class="n">vx</span><span class="p">,</span><span class="err">​</span> <span class="err">​</span><span class="n">vy</span><span class="p">,</span> <span class="n">vz</span><span class="p">)</span>
+<span class="c">#For the given particle_index, that particle's velocity-vector is set to: [vx,vy,vz]</span>
+<span class="n">setDamage</span><span class="p">(</span><span class="err">​​​</span><span class="n">particle_index</span><span class="p">,</span><span class="err">​</span> <span class="n">damage_value</span><span class="err">​</span><span class="p">)</span>
+<span class="c">#For the given particle_index, that particle's damage value is set to: damage_value </span>
+<span class="n">setStress</span><span class="p">(</span><span class="err">​</span><span class="n">particle_index</span><span class="err">​</span><span class="p">,</span><span class="err">​</span><span class="n">sxx</span><span class="p">,</span><span class="n">syy</span><span class="p">,</span><span class="n">szz</span><span class="p">,</span><span class="n">sxy</span><span class="p">,</span><span class="n">syz</span><span class="p">,</span><span class="n">sxz</span><span class="p">)</span><span class="err">​</span>
+<span class="c">#For the given particle_index, that particle's stress-tensor is set to:</span>
+<span class="c">#[sxx, sxy, sxz</span>
+<span class="c"># sxy, syy, syz</span>
+<span class="c"># sxz, syz, szz] </span>
+<span class="n">setTemp</span><span class="p">(</span><span class="err">​</span><span class="n">particle_index</span><span class="err">​</span><span class="p">,</span> <span class="err">​</span><span class="n">Temperature</span><span class="err">​</span><span class="p">)</span>
+<span class="c">#For the given particle_index, that particle's temperature is set to: Temperature</span>
+<span class="n">holdParticle</span><span class="p">(</span><span class="err">​</span><span class="n">particle_index</span><span class="err">​</span><span class="p">)</span>
+<span class="c">#For the given particle_index, this particle's position is not updated, it stays fixed in place. Note for rigid particles, see the Materials section.</span>
+<span class="c">#### Setting Particle Boundary Conditions</span>
+</code></pre></div></div>
+
+<h3 id="nodes">Nodes</h3>
+<h2 id="nodes-1">Nodes</h2>
+<p>*required
+    <code class="highlighter-rouge">node.setBC(nodeID,graphyt.BCTypes.grid_type,[vals])</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+<h2 id="material-points-1">Material Points</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+<h2 id="simulation-parameters">Simulation Parameters</h2>
+<p>*required
+    <code class="highlighter-rouge">is3D,tmax, graphyt.Parameters(max,is3D)</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<h2 id="set-up-io">Set Up I/O</h2>
+<p>*required
+    set arrays, <code class="highlighter-rouge">VTPWriter.VTPWriter(L,cellsize,numParticles)</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<h1 id="solver">Solver</h1>
+<p>*required
+    <code class="highlighter-rouge">graphyt.Solver(nodes, matpoints, parameters, materials)
+    solver.iterate_CPU(t, step,parameters)</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+<h2 id="example-2d-dam-break">Example: 2D Dam Break</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import the necessary modules</span>
+<span class="kn">import</span> <span class="nn">graphyt</span>
+<span class="kn">import</span> <span class="nn">pyck</span>
+<span class="kn">import</span> <span class="nn">VTKWriter</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="c">## GEOMETRY ##</span>
+
+<span class="c"># Set the resolution and the pack</span>
+<span class="n">cellsize</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">psep</span> <span class="o">=</span> <span class="n">cellsize</span><span class="o">/</span><span class="mf">2.0</span>
+<span class="c"># Background Grid</span>
+<span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">graphyt</span><span class="o">.</span><span class="n">Nodes</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">cellsize</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"+++++ Grid INFO+++++ No. Nodes:"</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">numNodes</span><span class="p">)</span>
+<span class="c"># Material Points</span>
+<span class="n">matpoints</span> <span class="o">=</span> <span class="n">graphyt</span><span class="o">.</span><span class="n">MaterialPoints</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+<span class="n">matpoints</span><span class="o">.</span><span class="n">psep</span> <span class="o">=</span> <span class="n">psep</span>
+<span class="c"># PYCK</span>
+<span class="c"># create materials</span>
+<span class="n">water</span> <span class="o">=</span> <span class="n">graphyt</span><span class="o">.</span><span class="n">MaterialModels</span><span class="p">()</span>
+<span class="n">water</span><span class="o">.</span><span class="n">setBulkMod</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
+<span class="n">water</span><span class="o">.</span><span class="n">setShearMod</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">water</span><span class="o">.</span><span class="n">setDensity</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">water</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="n">water</span><span class="p">]</span>
+<span class="c"># create packers and pack</span>
+<span class="n">cubic</span> <span class="o">=</span> <span class="n">pyck</span><span class="o">.</span><span class="n">CubicPacker</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">psep</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">pack</span> <span class="o">=</span> <span class="n">pyck</span><span class="o">.</span><span class="n">StructuredPack</span><span class="p">(</span><span class="n">cubic</span><span class="p">)</span>
+<span class="c"># create shapes</span>
+<span class="n">liquidLowerLeft</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.75</span><span class="o">*</span><span class="n">cellsize</span><span class="p">,</span><span class="mf">2.75</span><span class="o">*</span><span class="n">cellsize</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]</span>
+<span class="n">liquidUpperRight</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mf">0.75</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">cellsize</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]</span>
+<span class="n">liquid</span> <span class="o">=</span> <span class="n">pyck</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">liquidLowerLeft</span><span class="p">,</span><span class="n">liquidUpperRight</span><span class="p">)</span>
+
+<span class="c"># Add shapes to pack</span>
+<span class="n">pack</span><span class="o">.</span><span class="n">AddShape</span><span class="p">(</span><span class="n">liquid</span><span class="p">)</span>
+<span class="n">pack</span><span class="o">.</span><span class="n">Process</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">pyck</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">pack</span><span class="p">)</span>
+<span class="c"># Set the objectID's for all objects</span>
+<span class="n">objID</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">CreateIntField</span><span class="p">(</span><span class="s">"objectID"</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">SetIntField</span><span class="p">(</span><span class="n">objID</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> 
+<span class="c"># Set the material ID for all objects</span>
+<span class="n">matID</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">CreateIntField</span><span class="p">(</span><span class="s">"material"</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">SetIntField</span><span class="p">(</span><span class="n">matID</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> 
+<span class="c"># Add the geometry from pyck to the matpoints</span>
+<span class="n">matIDfield</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">GetIntField</span><span class="p">(</span><span class="n">matID</span><span class="p">)</span>
+<span class="n">objIDfield</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">GetIntField</span><span class="p">(</span><span class="n">objID</span><span class="p">)</span>
+<span class="n">numParticles</span> <span class="o">=</span> <span class="n">pack</span><span class="o">.</span><span class="n">GetNumParticles</span><span class="p">()</span>
+<span class="n">pyckPos</span> <span class="o">=</span> <span class="n">pack</span><span class="o">.</span><span class="n">GetPositions</span><span class="p">()</span>
+<span class="n">matpoints</span><span class="o">.</span><span class="n">addPyckGeom</span><span class="p">(</span><span class="n">pyckPos</span><span class="p">,</span><span class="n">numParticles</span><span class="p">)</span>
+<span class="n">matpoints</span><span class="o">.</span><span class="n">addPyckIntField</span><span class="p">(</span><span class="n">matIDfield</span><span class="p">)</span>
+<span class="n">matpoints</span><span class="o">.</span><span class="n">addPyckIntField</span><span class="p">(</span><span class="n">objIDfield</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"+++++ MAT POINT INFO+++++ No. Particles:"</span><span class="p">,</span> <span class="n">matpoints</span><span class="o">.</span><span class="n">numParticles</span><span class="p">)</span>
+
+<span class="c"># /////////-----------BOUNDARY CONDITIONS--------------///////</span>
+<span class="c"># //// MATERIAL POINT BOUNDARY CONDITIONS /////</span>
+<span class="c"># //// NODAL BOUNDARY CONDITIONS /////</span>
+<span class="c">#// Wall boundaries for Grid Nodes</span>
+<span class="n">wallthickness</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">nodes</span><span class="o">.</span><span class="n">cellsize</span>
+<span class="k">for</span>  <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">numNodes</span><span class="p">):</span>
+    <span class="n">posX</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">getPosX</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">posY</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">getPosY</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">posZ</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">getPosZ</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(((</span><span class="n">posX</span><span class="o">&gt;=</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">wallthickness</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">posX</span> <span class="o">&lt;=</span> <span class="n">wallthickness</span><span class="p">))</span> <span class="ow">or</span> <span class="p">((</span><span class="n">posY</span><span class="o">&gt;=</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">wallthickness</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">posY</span> <span class="o">&lt;=</span> <span class="n">wallthickness</span><span class="p">))):</span>
+        <span class="n">nodes</span><span class="o">.</span><span class="n">setBC</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">graphyt</span><span class="o">.</span><span class="n">BCTypes</span><span class="o">.</span><span class="n">grid_vx_vy</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"+++++ MODEL  INFORMATION+++++ Boundary Conditions Applied"</span><span class="p">)</span>
+
+<span class="c"># /////////// Parameters Set /////////////// #</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">5</span>   <span class="c"># //(time in seconds)</span>
+<span class="n">is3D</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">graphyt</span><span class="o">.</span><span class="n">Parameters</span><span class="p">(</span><span class="n">tmax</span><span class="p">,</span><span class="n">is3D</span><span class="p">)</span>
+<span class="n">parameters</span><span class="o">.</span><span class="n">setGravity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">parameters</span><span class="o">.</span><span class="n">setCFL</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
+<span class="n">parameters</span><span class="o">.</span><span class="n">setDampingCoef</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"+++++ MODEL  INFORMATION+++++ Parameters Set"</span><span class="p">)</span>
+
+<span class="c"># // //+++++++++++++++++++++++++++++++++++++++++++++++//</span>
+<span class="c"># // //+++++++++++++ MODEL RUN +++++++++++++++++++++++//</span>
+<span class="c"># // //+++++++++++++++++++++++++++++++++++++++++++++++//</span>
+<span class="c">#Now Mat points and nodes are set and ready to go, create a solver to run an MPM analysis on them</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"+++++ SOLVER  INFORMATION+++++ Starting Solver"</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">graphyt</span><span class="o">.</span><span class="n">Solver</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">matpoints</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">materials</span><span class="p">)</span>
+
+<span class="n">matpntPos</span> <span class="o">=</span> <span class="n">matpoints</span><span class="o">.</span><span class="n">getPosArr</span><span class="p">()</span>
+<span class="n">matpntMat</span> <span class="o">=</span> <span class="n">matpoints</span><span class="o">.</span><span class="n">getMatArr</span><span class="p">()</span>
+<span class="n">matpntMass</span> <span class="o">=</span> <span class="n">matpoints</span><span class="o">.</span><span class="n">getMassArr</span><span class="p">()</span>
+<span class="n">matpntVel</span> <span class="o">=</span> <span class="n">matpoints</span><span class="o">.</span><span class="n">getVelArr</span><span class="p">()</span>
+<span class="n">matpntStress</span> <span class="o">=</span> <span class="n">matpoints</span><span class="o">.</span><span class="n">getStressArr</span><span class="p">()</span>
+<span class="n">Le</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">cellsize</span><span class="p">),</span> <span class="mi">1</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">cellsize</span><span class="p">),</span> <span class="mi">1</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">cellsize</span><span class="p">)]</span>
+<span class="n">vtp</span> <span class="o">=</span> <span class="n">VTKWriter</span><span class="o">.</span><span class="n">VTPWriter</span><span class="p">(</span><span class="n">Le</span><span class="p">,</span><span class="n">cellsize</span><span class="p">,</span><span class="n">numParticles</span><span class="p">)</span>
+<span class="n">vtp</span><span class="o">.</span><span class="n">AddPositions</span><span class="p">(</span><span class="s">"Position"</span><span class="p">,</span> <span class="n">matpntPos</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">vtp</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="s">"Material"</span><span class="p">,</span> <span class="n">matpntMat</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">vtp</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="s">"Mass"</span><span class="p">,</span> <span class="n">matpntMass</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">vtp</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="s">"Velocity"</span><span class="p">,</span><span class="n">matpntVel</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">vtp</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="s">"Stress"</span><span class="p">,</span><span class="n">matpntStress</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+
+<span class="c"># Iterate over nsteps number of timesteps</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">tmax</span><span class="o">/</span><span class="n">solver</span><span class="o">.</span><span class="n">dt</span><span class="p">)):</span>  <span class="c"># ; t&lt;solver.tmax; t+=solver.dt):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="n">step</span>
+    <span class="n">solver</span><span class="o">.</span><span class="n">iterate_CPU</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+    <span class="n">vtpfname</span><span class="o">=</span><span class="s">'output/dambreak2D'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">step</span><span class="p">)</span><span class="o">+</span><span class="s">'.vtp'</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">50000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">vtp</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">vtpfname</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Total Simulation Duration (s)"</span><span class="p">)</span>
+</code></pre></div></div>
+
+    </div>
+    <!-- Footer -->
+    <footer class="py-3 bg-dark">
+            <div class="container">
+              <p class="m-0 text-center text-white">Copyright &copy; Sam Raymond 2018</p>
+            </div>
+            <!-- /.container -->
+          </footer>
+      
+          <!-- Bootstrap core JavaScript -->
+          <script src="vendor/jquery/jquery.min.js"></script>
+          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      
+        </body>
+      
+      </html>
